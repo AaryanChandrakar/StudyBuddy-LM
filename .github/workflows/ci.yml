@@ -1,0 +1,88 @@
+name: build-and-lint
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install backend deps
+        working-directory: server
+        run: npm ci --legacy-peer-deps
+
+      - name: Lint backend
+        working-directory: server
+        run: npm run lint -- --max-warnings=0
+
+      - name: Install frontend deps
+        working-directory: client
+        run: npm ci --legacy-peer-deps
+
+      - name: Lint frontend
+        working-directory: client
+        run: npm run lint -- --max-warnings=0
+
+      - name: Build backend Docker image
+        run: docker build -t backend ./server
+
+      - name: Build frontend Docker image
+        run: docker build -t frontend ./client
+
+  deploy:
+    needs: build-and-lint
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (optional)
+        uses: actions/checkout@v4
+
+      - name: Add HETZNER host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "$HETZNER_HOST" >> ~/.ssh/known_hosts
+        env:
+          HETZNER_HOST: ${{ secrets.HETZNER_HOST }}
+
+      - name: Write SSH Key
+        run: |
+          echo "${HETZNER_KEY}" > hetzner_key.pem
+          chmod 600 hetzner_key.pem
+        env:
+          HETZNER_KEY: ${{ secrets.HETZNER_KEY }}
+
+      - name: Deploy on HETZNER (git pull + docker compose up -d --build)
+        env:
+          HETZNER_HOST: ${{ secrets.HETZNER_HOST }}
+          HETZNER_USER: ${{ secrets.HETZNER_USER }}
+          HETZNER_APP_DIR: ${{ secrets.HETZNER_APP_DIR }}
+        run: |
+          ssh -i hetzner_key.pem ${HETZNER_USER}@${HETZNER_HOST} << EOF
+            set -e
+            cd "${HETZNER_APP_DIR}"
+
+            git fetch --all
+            git reset --hard origin/main
+
+            docker compose up -d --build
+
+            echo "Waiting for services to start..."
+            sleep 10
+
+            docker image prune -f
+
+            docker compose ps
+          EOF
