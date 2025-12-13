@@ -7,37 +7,33 @@ services:
       - qdrant_storage:/qdrant/storage
     networks:
       - studybuddylm-net
-    environment:
-      - QDRANT__SERVICE__HTTP_PORT=6333
-      - QDRANT__SERVICE__GRPC_PORT=6334
 
   backend:
-    build:
-      context: ./server
-      dockerfile: Dockerfile
+    build: ./server
     container_name: thinklm-backend
     restart: unless-stopped
     env_file:
       - ./server/.env
     depends_on:
       - qdrant
+    ports:
+      - "3000:3000"
     networks:
       - studybuddylm-net
 
   frontend:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
+    build: ./client
     container_name: thinklm-frontend
     restart: unless-stopped
     depends_on:
       - backend
+    ports:
+      - "5173:5173"
     networks:
       - studybuddylm-net
 
 volumes:
   qdrant_storage:
-    driver: local
 
 networks:
   studybuddylm-net:
