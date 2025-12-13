@@ -1,4 +1,4 @@
-# ThinkLM
+# StudyBuddy LM
 
 <div align="center">
 
@@ -11,7 +11,7 @@ _Transform your documents into an intelligent, searchable knowledge base powered
 [![React](https://img.shields.io/badge/React-19.1.1-blue.svg)](https://reactjs.org/)
 [![Express](https://img.shields.io/badge/Express-5.1.0-green.svg)](https://expressjs.com/)
 
-[Live Demo](https://thinklm.milindsahu.com/) • [Report Bug](https://github.com/milindkusahu/ThinkLM/issues) • [Request Feature](https://milindsahu.com/#contact)
+[Live Demo](https://studybuddylm.top/) • [Report Bug](https://github.com/AaryanChandrakar/StudyBuddy-LM/issues)
 
 </div>
 
@@ -37,7 +37,7 @@ _Transform your documents into an intelligent, searchable knowledge base powered
 
 ## Overview
 
-ThinkLM is a powerful AI-powered document analysis and chat platform that transforms your documents, websites, and multimedia content into an intelligent, searchable knowledge base. Built with modern web technologies and advanced AI capabilities, ThinkLM enables users to upload various content types and interact with them through natural language queries.
+StudyBuddy LM is a powerful AI-powered document analysis and chat platform that transforms your documents, websites, and multimedia content into an intelligent, searchable knowledge base. Built with modern web technologies and advanced AI capabilities, StudyBuddy LM enables users to upload various content types and interact with them through natural language queries.
 
 ### Key Capabilities
 
@@ -119,43 +119,43 @@ ThinkLM is a powerful AI-powered document analysis and chat platform that transf
 
 ### Landing Page
 
-![Landing Page](https://github.com/milindkusahu/ThinkLM/blob/main/images/landing-page.png?raw=true)
+![Landing Page](https://github.com/AaryanChandrakar/StudyBuddy-LM/blob/main/images/landing-page.png?raw=true)
 
 _Modern, responsive landing page featuring the hero section with gradient backgrounds and animated elements_
 
 ### Dashboard
 
-![Dashboard](https://github.com/milindkusahu/ThinkLM/blob/main/images/dashboard.png?raw=true)
+![Dashboard](https://github.com/AaryanChandrakar/StudyBuddy-LM/blob/main/images/dashboard.png?raw=true)
 
 _Clean dashboard interface showing user notebooks, recent activity, and quick access to features_
 
 ### Statistics Page
 
-![Statistics](https://github.com/milindkusahu/ThinkLM/blob/main/images/statistics.png?raw=true)
+![Statistics](https://github.com/AaryanChandrakar/StudyBuddy-LM/blob/main/images/statistics.png?raw=true)
 
 _Comprehensive statistics page showing credit usage, data sources, performance metrics, and account activity_
 
 ### Notebook Interface
 
-![Notebook](https://github.com/milindkusahu/ThinkLM/blob/main/images/notebook.png?raw=true)
+![Notebook](https://github.com/AaryanChandrakar/StudyBuddy-LM/blob/main/images/notebook.png?raw=true)
 
 _Interactive notebook interface with chat panel, document sources, and content management tools_
 
 ### Chat Interface
 
-![Chat Interface](https://github.com/milindkusahu/ThinkLM/blob/main/images/chat-interface.png?raw=true)
+![Chat Interface](https://github.com/AaryanChandrakar/StudyBuddy-LM/blob/main/images/chat-interface.png?raw=true)
 
 _AI-powered chat interface displaying intelligent responses with source citations and references_
 
 ### Document Upload
 
-![Document Upload](https://github.com/milindkusahu/ThinkLM/blob/main/images/document-upload.png?raw=true)
+![Document Upload](https://github.com/AaryanChandrakar/StudyBuddy-LM/blob/main/images/document-upload.png?raw=true)
 
 _Multi-source document upload interface supporting PDFs, URLs, YouTube videos, and text input_
 
 ### Authentication
 
-![Authentication](https://github.com/milindkusahu/ThinkLM/blob/main/images/authentication.png?raw=true)
+![Authentication](https://github.com/AaryanChandrakar/StudyBuddy-LM/blob/main/images/authentication.png?raw=true)
 
 _Secure authentication system with login, registration, and password recovery functionality_
 
@@ -258,7 +258,7 @@ src/
 
 ### System Interaction Overview
 
-ThinkLM follows a sophisticated multi-layered architecture where each component plays a crucial role in the document processing and AI-powered chat experience.
+StudyBuddy LM follows a sophisticated multi-layered architecture where each component plays a crucial role in the document processing and AI-powered chat experience.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -553,7 +553,7 @@ Error Occurrence
    - Vector embedding generation
    - Email sending queue
 
-This comprehensive flow ensures that ThinkLM provides a seamless, efficient, and scalable document analysis and chat experience.
+This comprehensive flow ensures that StudyBuddy LM provides a seamless, efficient, and scalable document analysis and chat experience.
 
 ---
 
@@ -642,7 +642,7 @@ This comprehensive flow ensures that ThinkLM provides a seamless, efficient, and
 
 ### Credit System
 
-ThinkLM uses a credit-based system to manage usage and costs:
+StudyBuddy LM uses a credit-based system to manage usage and costs:
 
 - **1 Credit ≈ 1,000 tokens** processed
 - **Document upload**: 2-10 credits (depending on size)
@@ -655,7 +655,7 @@ ThinkLM uses a credit-based system to manage usage and costs:
 
 ## Prerequisites
 
-Before running ThinkLM, ensure you have the following installed:
+Before running StudyBuddy LM, ensure you have the following installed:
 
 - **Node.js** (v18.0.0 or higher)
 - **npm** (v8.0.0 or higher) or **yarn**
@@ -674,8 +674,8 @@ Before running ThinkLM, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/milindkusahu/ThinkLM.git
-cd ThinkLM
+git clone https://github.com/AaryanChandrakar/StudyBuddy-LM.git
+cd StudyBuddy LM
 ```
 
 ### 2. Backend Setup
@@ -795,8 +795,8 @@ NODE_ENV=development
 FRONTEND_URL=http://localhost:5173
 
 # Database Configuration
-MONGO_URI=mongodb://localhost:27017/thinklm
-# For MongoDB Atlas: mongodb+srv://username:password@cluster.mongodb.net/thinklm
+MONGO_URI=mongodb://localhost:27017/StudyBuddy LM
+# For MongoDB Atlas: mongodb+srv://username:password@cluster.mongodb.net/StudyBuddy LM
 
 # JWT Configuration
 JWT_SECRET=your-super-secret-jwt-key-here
@@ -815,7 +815,7 @@ MAILTRAP_HOST=smtp.mailtrap.io
 MAILTRAP_PORT=2525
 MAILTRAP_USERNAME=your-mailtrap-username
 MAILTRAP_PASSWORD=your-mailtrap-password
-MAILTRAP_SENDEREMAIL=noreply@thinklm.com
+MAILTRAP_SENDEREMAIL=noreply@StudyBuddy LM.com
 
 # Credit System Configuration
 CHARACTERS_PER_TOKEN=4
@@ -831,7 +831,7 @@ Create a `.env` file in the `frontend` directory:
 VITE_API_URL=http://localhost:3000/api/v1
 
 # Application Configuration
-VITE_APP_NAME=ThinkLM
+VITE_APP_NAME=StudyBuddy LM
 VITE_APP_VERSION=1.0.0
 ```
 
@@ -1014,7 +1014,7 @@ Error responses include detailed information:
 
 ## Contributing
 
-We welcome contributions to ThinkLM! Please follow these guidelines:
+We welcome contributions to StudyBuddy LM! Please follow these guidelines:
 
 ### Development Setup
 
@@ -1053,9 +1053,9 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-**Milind Kumar Sahu** - [@milindkusahu](https://github.com/milindkusahu)
+**Aaryan Kumar Chandrakar** - [@AaryanChandrakar](https://github.com/AaryanChandrakar)
 
-Project Link: [https://github.com/milindkusahu/ThinkLM](https://github.com/milindkusahu/ThinkLM)
+Project Link: [https://github.com/AaryanChandrakar/StudyBuddy-LM](https://github.com/AaryanChandrakar/StudyBuddy-LM)
 
 ---
 
