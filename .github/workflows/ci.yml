@@ -59,8 +59,8 @@ jobs:
 
       - name: Write SSH Key
         run: |
-          echo "${AWS_KEY}" > AWS_KEY.ppk
-          chmod 600 AWS_KEY.ppk
+          echo "${AWS_KEY}" > AWS_KEY.pem
+          chmod 600 AWS_KEY.pem
         env:
           AWS_KEY: ${{ secrets.AWS_KEY }}
 
@@ -70,7 +70,7 @@ jobs:
           AWS_USER: ${{ secrets.AWS_USER }}
           AWS_APP_DIR: ${{ secrets.AWS_APP_DIR }}
         run: |
-          ssh -i AWS_KEY.ppk ${AWS_USER}@${AWS_HOST} << EOF
+          ssh -i AWS_KEY.pem ${AWS_USER}@${AWS_HOST} << EOF
             set -e
             cd "${AWS_APP_DIR}"
 
