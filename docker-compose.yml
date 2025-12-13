@@ -6,7 +6,7 @@ services:
     volumes:
       - qdrant_storage:/qdrant/storage
     networks:
-      - thinklm-net
+      - studybuddylm-net
     environment:
       - QDRANT__SERVICE__HTTP_PORT=6333
       - QDRANT__SERVICE__GRPC_PORT=6334
@@ -22,7 +22,7 @@ services:
     depends_on:
       - qdrant
     networks:
-      - thinklm-net
+      - studybuddylm-net
 
   frontend:
     build:
@@ -33,12 +33,12 @@ services:
     depends_on:
       - backend
     networks:
-      - thinklm-net
+      - studybuddylm-net
 
 volumes:
   qdrant_storage:
     driver: local
 
 networks:
-  thinklm-net:
+  studybuddylm-net:
     external: true
