@@ -157,8 +157,8 @@ export default function LoginPage() {
           className="w-full"
           onClick={() => {
             // Fill demo credentials
-            document.getElementById("email").value = "demo@thinklm.com";
-            document.getElementById("password").value = "demo123456";
+            document.getElementById("email").value = "demo@studybuddylm.top";
+            document.getElementById("password").value = "aryan@1234";
           }}
         >
           Use Demo Account
