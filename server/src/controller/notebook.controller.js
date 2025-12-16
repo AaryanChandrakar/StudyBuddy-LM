@@ -138,8 +138,39 @@ const deleteNotebook = async (req, res) => {
       });
     }
 
-    // Delete all contents first
+    // Get all contents associated with this notebook
+    const contents = await Content.find({ notebookId: id });
+
+    // Clean up each content's resources
+    for (const content of contents) {
+      // Delete Qdrant collection if it exists
+      if (content.qdrantCollectionName) {
+        try {
+          await deleteCollection(content._id);
+        } catch (error) {
+          console.log(`Error deleting Qdrant collection for content ${content._id}:`, error.message);
+        }
+      }
+
+      // Delete file if it exists
+      if (content.sourceType === "file" && content.sourceData.filePath) {
+        try {
+          await fs.unlink(content.sourceData.filePath);
+        } catch (error) {
+          console.log(`File already deleted or not found for content ${content._id}`);
+        }
+      }
+    }
+
+    // Delete all contents
     await Content.deleteMany({ notebookId: id });
+
+    // Update user's data source count
+    const user = await User.findById(userId);
+    if (user && contents.length > 0) {
+      user.dataSourcesCount = Math.max(0, user.dataSourcesCount - contents.length);
+      await user.save();
+    }
 
     // Delete notebook
     await Notebook.findByIdAndDelete(id);

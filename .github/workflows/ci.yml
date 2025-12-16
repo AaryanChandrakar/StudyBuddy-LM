@@ -38,8 +38,9 @@ jobs:
       - name: Build backend Docker image
         run: docker build -t backend ./server
 
-      - name: Build frontend Docker image
-        run: docker build -t frontend ./client
+      - name: Build frontend
+        working-directory: client
+        run: npm run build
 
   deploy:
     needs: build-and-lint
@@ -47,8 +48,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout (optional)
+      - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install frontend deps
+        working-directory: client
+        run: npm ci --legacy-peer-deps
+
+      - name: Build frontend
+        working-directory: client
+        run: npm run build
 
       - name: Add AWS host to known_hosts
         run: |
@@ -64,13 +78,13 @@ jobs:
         env:
           AWS_KEY: ${{ secrets.AWS_KEY }}
 
-      - name: Deploy on AWS (git pull + docker compose up -d --build)
+      - name: Deploy backend on AWS
         env:
           AWS_HOST: ${{ secrets.AWS_HOST }}
           AWS_USER: ${{ secrets.AWS_USER }}
           AWS_APP_DIR: ${{ secrets.AWS_APP_DIR }}
         run: |
-          ssh -i AWS_KEY.pem ${AWS_USER}@${AWS_HOST} << EOF
+          ssh -i AWS_KEY.pem ${AWS_USER}@${AWS_HOST} << 'EOF'
             set -e
             cd "${AWS_APP_DIR}"
 
@@ -85,4 +99,36 @@ jobs:
             docker image prune -f
 
             docker compose ps
+          EOF
+
+      - name: Deploy frontend to Nginx
+        env:
+          AWS_HOST: ${{ secrets.AWS_HOST }}
+          AWS_USER: ${{ secrets.AWS_USER }}
+        run: |
+          # Copy dist folder to server
+          scp -i AWS_KEY.pem -r client/dist/* ${AWS_USER}@${AWS_HOST}:/tmp/frontend-dist/
+
+          # Move files and set permissions
+          ssh -i AWS_KEY.pem ${AWS_USER}@${AWS_HOST} << 'EOF'
+            set -e
+            
+            # Remove old files
+            sudo rm -rf /var/www/studybuddylm/*
+            
+            # Copy new files
+            sudo cp -r /tmp/frontend-dist/* /var/www/studybuddylm/
+            
+            # Fix permissions
+            sudo chown -R www-data:www-data /var/www/studybuddylm
+            sudo chmod -R 755 /var/www/studybuddylm
+            
+            # Clean up temp files
+            rm -rf /tmp/frontend-dist
+            
+            # Test and reload Nginx
+            sudo nginx -t
+            sudo systemctl reload nginx
+            
+            echo "Frontend deployed successfully!"
           EOF
