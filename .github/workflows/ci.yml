@@ -84,7 +84,7 @@ jobs:
           AWS_USER: ${{ secrets.AWS_USER }}
           AWS_APP_DIR: ${{ secrets.AWS_APP_DIR }}
         run: |
-          ssh -i AWS_KEY.pem ${AWS_USER}@${AWS_HOST} << 'EOF'
+          ssh -i AWS_KEY.pem ${AWS_USER}@${AWS_HOST} << EOF
             set -e
             cd "${AWS_APP_DIR}"
 
