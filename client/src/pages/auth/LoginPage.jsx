@@ -24,6 +24,8 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
+    setValue,
+    trigger,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
@@ -66,7 +68,7 @@ export default function LoginPage() {
   };
 
   return (
-    <AuthLayout title="Welcome back" subtitle="Sign in to your ThinkLM account">
+    <AuthLayout title="Welcome back" subtitle="Sign in to your StudyBuddyLM account">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Email Field */}
         <div className="space-y-2">
@@ -149,16 +151,24 @@ export default function LoginPage() {
       <div className="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-lg">
         <h3 className="font-medium text-primary mb-2">Try the Demo</h3>
         <p className="text-sm text-muted-foreground mb-3">
-          Want to explore ThinkLM without signing up? Use our demo account.
+          Want to explore StudyBuddyLM without signing up? Use our demo account.
         </p>
         <Button
           variant="outline"
           size="sm"
           className="w-full"
-          onClick={() => {
-            // Fill demo credentials
-            document.getElementById("email").value = "demo@studybuddylm.top";
-            document.getElementById("password").value = "aryan@1234";
+           onClick={async () => {
+            setValue("email", "demo@studybuddylm.top", {
+              shouldValidate: true,
+              shouldDirty: true,
+            });
+
+            setValue("password", "aryan@1234", {
+              shouldValidate: true,
+              shouldDirty: true,
+            });
+
+            await trigger(); // clears validation errors immediately
           }}
         >
           Use Demo Account

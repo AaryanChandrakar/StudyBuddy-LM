@@ -43,7 +43,7 @@ export default function Footer() {
                   <Brain className="h-5 w-5" />
                 </div>
                 <span className="text-xl font-bold text-foreground">
-                  ThinkLM
+                  StudyBuddyLM
                 </span>
               </Link>
 
@@ -136,7 +136,7 @@ export default function Footer() {
         <div className="py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-muted-foreground">
-              © 2025 ThinkLM. All rights reserved.
+              © 2025 StudyBuddyLM. All rights reserved.
             </div>
 
             <div className="flex items-center gap-6">

@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "ThinkLM Backend",
+  "description": "StudyBuddyLM Backend",
   "type": "module",
   "main": "app.js",
   "scripts": {

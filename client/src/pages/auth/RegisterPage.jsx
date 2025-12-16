@@ -74,7 +74,7 @@ export default function RegisterPage() {
   return (
     <AuthLayout
       title="Create your account"
-      subtitle="Start your journey with ThinkLM today"
+      subtitle="Start your journey with StudyBuddyLM today"
     >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Name Field */}

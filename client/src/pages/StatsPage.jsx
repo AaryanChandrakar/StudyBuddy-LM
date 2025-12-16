@@ -116,7 +116,7 @@ export default function StatsPage() {
           Usage Statistics
         </h1>
         <p className="text-muted-foreground">
-          Track your ThinkLM usage, credits, and activity
+          Track your StudyBuddyLM usage, credits, and activity
         </p>
       </div>
 

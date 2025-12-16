@@ -47,8 +47,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout (optional)
+      - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node (for frontend build)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # BUILD FRONTEND DIST (ONLY ADDITION)
+      - name: Build frontend (dist)
+        working-directory: client
+        run: |
+          npm ci --legacy-peer-deps
+          npm run build
 
       - name: Add AWS host to known_hosts
         run: |
@@ -64,7 +76,18 @@ jobs:
         env:
           AWS_KEY: ${{ secrets.AWS_KEY }}
 
-      - name: Deploy on AWS (git pull + docker compose up -d --build)
+      # COPY DIST TO EC2 (THIS IS WHAT YOU ASKED)
+      - name: Copy frontend dist to EC2
+        run: |
+          rsync -avz --delete \
+            client/dist/ \
+            ${AWS_USER}@${AWS_HOST}:/var/www/studybuddylm/
+        env:
+          AWS_USER: ${{ secrets.AWS_USER }}
+          AWS_HOST: ${{ secrets.AWS_HOST }}
+
+      # EXISTING DEPLOY (UNCHANGED, JUST ADD NGINX RELOAD)
+      - name: Deploy on AWS
         env:
           AWS_HOST: ${{ secrets.AWS_HOST }}
           AWS_USER: ${{ secrets.AWS_USER }}
@@ -79,10 +102,9 @@ jobs:
 
             docker compose up -d --build
 
-            echo "Waiting for services to start..."
-            sleep 10
+            sudo nginx -t
+            sudo systemctl reload nginx
 
             docker image prune -f
-
             docker compose ps
           EOF

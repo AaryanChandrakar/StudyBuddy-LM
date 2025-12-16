@@ -9,7 +9,7 @@ const plans = [
     name: "Free",
     price: "$0",
     period: "forever",
-    description: "Perfect for trying out ThinkLM",
+    description: "Perfect for trying out StudyBuddyLM",
     icon: Sparkles,
     features: [
       "20 free credits",

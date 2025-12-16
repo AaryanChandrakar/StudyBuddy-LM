@@ -63,7 +63,7 @@ export default function AddContentDialog({ open, onOpenChange, notebookId }) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="mt-0 max-h-[95vh] overflow-y-auto p-5 scrollbar-thin scrollbar-thumb-muted">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <FileText className="h-5 w-5 text-primary" />

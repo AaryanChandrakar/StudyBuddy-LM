@@ -35,7 +35,7 @@ app.use("/api/v1/chat", chatRoutes);
 app.get("/api/health", (req, res) => {
   res.status(200).json({
     success: true,
-    message: "ThinkLM API is running",
+    message: "StudyBuddyLM API is running",
   });
 });
 
