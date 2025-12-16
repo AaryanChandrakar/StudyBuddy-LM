@@ -157,7 +157,7 @@ const deleteNotebook = async (req, res) => {
         try {
           await fs.unlink(content.sourceData.filePath);
         } catch (error) {
-          console.log(`File already deleted or not found for content ${content._id}`);
+          console.log(`File already deleted or not found for content ${content._id}`, error.message);
         }
       }
     }
