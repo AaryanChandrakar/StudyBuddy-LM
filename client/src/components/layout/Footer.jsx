@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Brain, Github, Twitter, Mail } from "lucide-react";
+import { Brain, Github, Linkedin, Mail } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 const footerLinks = {
@@ -55,7 +55,7 @@ export default function Footer() {
               {/* Social Links */}
               <div className="flex items-center gap-4">
                 <a
-                  href="https://github.com/milindkusahu"
+                  href="https://github.com/AaryanChandrakar"
                   className="p-2 rounded-lg bg-secondary hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -63,15 +63,15 @@ export default function Footer() {
                   <Github className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://x.com/milindkusahu"
+                  href="https://www.linkedin.com/in/aaryan-chandrakar/"
                   className="p-2 rounded-lg bg-secondary hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Twitter className="w-5 h-5" />
+                  <Linkedin className="w-5 h-5" />
                 </a>
                 <a
-                  href="mailto:support@milindsahu.com"
+                  href="mailto:aryanchandrakar100@gmail.com"
                   className="p-2 rounded-lg bg-secondary hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
                 >
                   <Mail className="w-5 h-5" />
